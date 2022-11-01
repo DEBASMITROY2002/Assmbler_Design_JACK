@@ -66,9 +66,9 @@ public:
   }
 
   /**
-   * 
-   * 
-   *  
+   * Adds a new Entry
+   * If already there(i.e-> label with no address set),
+   *  Label's address is Updated
    */
   void addEntry(SymbolTableEntry symbolTableEntry)
   {
