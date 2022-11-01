@@ -53,6 +53,11 @@ public:
     table["R15"] = {"R15", 15};
   }
 
+  /*
+  * Returns the address of a specific symbol
+  * For data-variable symbol, address is of Data Memory
+  * Otherwise(i.e->labels) address of Instruction memory
+  */
   int getAddress(string symbol)
   {
     if (table.find(symbol) != table.end())
@@ -60,6 +65,11 @@ public:
     return -1;
   }
 
+  /**
+   * 
+   * 
+   *  
+   */
   void addEntry(SymbolTableEntry symbolTableEntry)
   {
     string symbol = symbolTableEntry.symbol;
