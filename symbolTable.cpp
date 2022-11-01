@@ -1,9 +1,9 @@
 /*
 Authors:
-1. Debamsit Roy, JU CSE
+1. Debasmit Roy, JU CSE
 2.
 3.
-4. 
+4.
 */
 
 #include<iostream.h>
