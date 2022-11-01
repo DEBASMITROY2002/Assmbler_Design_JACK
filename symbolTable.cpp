@@ -2,12 +2,8 @@
 Authors:
 1. Debasmit Roy, JU CSE
 2. Anurup Naskar,JU CSE
-<<<<<<< HEAD
 3. Imon Raj, JU CSE
-=======
-3. Kushal Das, JU CSE
->>>>>>> 08150cd57b1415c4dd9229082f8fb1d1a5f622ff
-4.
+4. Kushal Das, JU CSE
 */
 
 #include <iostream>
