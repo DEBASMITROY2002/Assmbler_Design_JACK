@@ -64,11 +64,11 @@ public:
   {
     string symbol = symbolTableEntry.symbol;
 
-    if (table.find(symbol) != table.end())
-      if (table[symbol].address == -1)
+    if (table.find(symbol) != table.end() && table[symbol].address == -1)
+      table[symbol].address = symbolTableEntry.address;
 
-        if (table.find(symbol) == table.end())
-          table[symbolTableEntry.symbol] = symbolTableEntry;
+    if (table.find(symbol) == table.end())
+      table[symbolTableEntry.symbol] = symbolTableEntry;
   }
 };
 
