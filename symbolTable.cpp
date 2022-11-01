@@ -54,7 +54,7 @@ public:
     table["R15"] = {"R15", 15};
   }
 
-  /*
+  /**
   * Returns the address of a specific symbol
   * For data-variable symbol, address is of Data Memory
   * Otherwise(i.e->labels) address of Instruction memory
@@ -85,8 +85,5 @@ public:
 
 int main(int argc, char const *argv[])
 {
-  /* code */
-  // Commited
-
   return 0;
 }
