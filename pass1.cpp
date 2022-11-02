@@ -13,7 +13,7 @@ Authors:
 #include <vector>
 using namespace std;
 
-
+// remove WhiteSpaces, Deliminators, Comments and EmptyLine
 class Clipper
 {
     private:
@@ -22,12 +22,14 @@ class Clipper
         virtual vector<string> removeCommentsAndEmptyLine()=0;
 };
 
+// registers the symbols in symbol table
 class Mapper
 {
     private:
     public:
 };
 
+// takes the .asm file , performs clipping and mapping and creates .inter file
 class Pass1: public Clipper,public Mapper
 {
     private:
