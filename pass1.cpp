@@ -185,7 +185,7 @@ class Pass1: public Clipper,public Mapper
 
     bool checkIfReserved(string s){
         return symbolTable.getAddress(s)!=-1;
-    }
+    } 
 
     void solve_starts_with_at(){
        for(auto line:lines){
