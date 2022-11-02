@@ -13,7 +13,7 @@ Authors:
 #include <vector>
 using namespace std;
 
-// remove WhiteSpaces, Deliminators, Comments and EmptyLine
+// removes WhiteSpaces, Deliminators, Comments and EmptyLine
 class Clipper
 {
     private:
