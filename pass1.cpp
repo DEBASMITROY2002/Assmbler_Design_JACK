@@ -180,7 +180,7 @@ class Pass1: public Clipper,public Mapper
                 symbolTable.addEntry(e);
             }
         }
-    }
+    } 
 
 
     bool checkIfReserved(string s){
