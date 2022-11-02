@@ -137,8 +137,10 @@ class Pass1: public Clipper,public Mapper
     }
 
     void printConvertedLines(){
+        cout<<"... Intermediate State";
         for(auto line:lines)
             cout<<line<<endl;
+        cout<<"\t\t\t~end";
     }
    
     void performStage1(){
