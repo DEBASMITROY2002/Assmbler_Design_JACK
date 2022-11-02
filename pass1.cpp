@@ -4,7 +4,6 @@ Authors:
 2. Anurup Naskar,JU CSE
 3. Imon Raj, JU CSE
 4. Kushal Das, JU CSE
-
 */
 
 #include <iostream>
@@ -12,6 +11,83 @@ Authors:
 #include <map>
 #include <vector>
 using namespace std;
+
+struct SymbolTableEntry
+{
+  string symbol;
+  int address;
+};
+
+// manages symbol table
+class SymbolTable
+{
+private:
+  const int max_length = 20;
+  const int max_entry = 1024;
+
+  map<string, SymbolTableEntry> table;
+
+public:
+  SymbolTable()
+  {
+    table["sp"] = {"SP", 0};
+    table["LCL"] = {"LCL", 1};
+    table["ARG"] = {"ARG", 2};
+    table["THIS"] = {"THIS", 3};
+    table["THAT"] = {"THAT", 4};
+    table["R0"] = {"R0", 0};
+    table["R1"] = {"R1", 1};
+    table["R2"] = {"R2", 2};
+    table["R3"] = {"R3", 3};
+    table["R4"] = {"R4", 4};
+    table["R5"] = {"R5", 5};
+    table["R6"] = {"R6", 6};
+    table["R7"] = {"R7", 7};
+    table["R8"] = {"R8", 8};
+    table["R9"] = {"R9", 9};
+    table["R10"] = {"R10", 10};
+    table["R11"] = {"R11", 11};
+    table["R12"] = {"R12", 12};
+    table["R13"] = {"R13", 13};
+    table["R14"] = {"R14", 14};
+    table["R15"] = {"R15", 15};
+  }
+
+  /**
+  * Returns the address of a specific symbol
+  * For data-variable symbol, address is of Data Memory
+  * Otherwise(i.e->labels) address of Instruction memory
+  */
+  int getAddress(string symbol)
+  {
+    if (table.find(symbol) != table.end())
+      return table[symbol].address;
+    return -1;
+  }
+
+  /** 
+   * Adds a new Entry
+   * If already there(i.e-> label with no address set),
+   *  Label's address is Updated
+   */
+  void addEntry(SymbolTableEntry symbolTableEntry)
+  {
+    string symbol = symbolTableEntry.symbol;
+
+    if (table.find(symbol) != table.end() && table[symbol].address == -1)
+      table[symbol].address = symbolTableEntry.address;
+
+    if (table.find(symbol) == table.end())
+      table[symbolTableEntry.symbol] = symbolTableEntry;
+  }
+
+  void printSymbolTable(){
+    printf("Symbol\t|\tValue\n______________________\n");
+    for(auto x:table)
+      cout<<x.second.symbol<<"\t\t"<<x.second.address<<endl;
+    printf("\t\t\t~end\n\n");
+  }
+};
 
 // removes WhiteSpaces, Deliminators, Comments and EmptyLine
 class Clipper
@@ -35,12 +111,16 @@ class Pass1: public Clipper,public Mapper
     private:
         const char* FILE_NAME;
         vector<string> lines;
+        SymbolTable symbolTable;
+
+        int cur_instruction_address = 0;
+        int cur_data_address = 0;
+
     public:
 
     Pass1(const char* _FILE_NAME){
         FILE_NAME = _FILE_NAME;
     }
- 
     ~Pass1(){
         string inter_file_name = FILE_NAME;
         inter_file_name+=".inter";
@@ -50,13 +130,15 @@ class Pass1: public Clipper,public Mapper
         fclose(inter_file);
         lines.clear();
     }
-
+    void printConvertedLines(){
+        for(auto line:lines)
+            cout<<line<<endl;
+    }
     void performStage1(){
         lines = fileToStrings();
         lines = removeWhiteSpacesAndDeliminators();
         lines = removeCommentsAndEmptyLine();
     }
-
     vector<string> fileToStrings(){
         FILE *file = fopen(FILE_NAME,"r");
 
@@ -70,6 +152,7 @@ class Pass1: public Clipper,public Mapper
         fclose(file);
         return lines;
     }
+    
 
     vector<string> removeWhiteSpacesAndDeliminators(){
         for(auto &line:lines){
@@ -78,7 +161,6 @@ class Pass1: public Clipper,public Mapper
         }
     return lines;
     }
-
     vector<string> removeCommentsAndEmptyLine(){
         vector<string>pureLines;
         for(auto &line:lines){
@@ -90,15 +172,34 @@ class Pass1: public Clipper,public Mapper
         return pureLines;
     }
 
-    void printConvertedLines(){
-        for(auto line:lines)
-            cout<<line<<endl;
+    void solve_paranthesizedLabel(){
+        for(auto line:lines){
+            if(line[0]=='('){
+                string lab_symbol = line.substr(1, line.find(")"));
+                SymbolTableEntry e{lab_symbol,-1}; 
+                symbolTable.addEntry(e);
+            }
+        }
+    }
+
+
+    bool checkIfReserved(string s){
+        return symbolTable.getAddress(s)!=-1;
+    }
+
+    void solve_starts_with_at(){
+       for(auto line:lines){
+            if(line[0]=='@' && !checkIfReserved(line.substr(1))){
+                // TODO
+            }
+        } 
     }
 
 };
 
-int main(int argc, char const *argv[]){
 
+
+int main(int argc, char const *argv[]){
     Pass1 pass1("./Max.asm");
     pass1.performStage1();
     pass1.printConvertedLines();

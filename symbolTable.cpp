@@ -19,7 +19,6 @@ struct SymbolTableEntry
   string symbol;
   int address;
 };
-
 class SymbolTable
 {
 private:
@@ -31,7 +30,7 @@ private:
 public:
   SymbolTable()
   {
-    table["sp"] = {"SP", 0};
+    table["SP"] = {"SP", 0};
     table["LCL"] = {"LCL", 1};
     table["ARG"] = {"ARG", 2};
     table["THIS"] = {"THIS", 3};
@@ -89,6 +88,7 @@ public:
     printf("\t\t\t~end\n\n");
   }
 };
+
 
 int main(int argc, char const *argv[])
 {
