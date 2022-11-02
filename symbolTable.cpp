@@ -30,11 +30,14 @@ private:
 public:
   SymbolTable()
   {
+    // Data Memory
     table["SP"] = {"SP", 0};
     table["LCL"] = {"LCL", 1};
     table["ARG"] = {"ARG", 2};
     table["THIS"] = {"THIS", 3};
     table["THAT"] = {"THAT", 4};
+    
+    // Instruction Memory
     table["R0"] = {"R0", 0};
     table["R1"] = {"R1", 1};
     table["R2"] = {"R2", 2};
