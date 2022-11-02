@@ -81,9 +81,27 @@ public:
     if (table.find(symbol) == table.end())
       table[symbolTableEntry.symbol] = symbolTableEntry;
   }
+
+  void printSymbolTable(){
+    printf("Symbol\t|\tValue\n______________________\n");
+    for(auto x:table)
+      cout<<x.second.symbol<<"\t\t"<<x.second.address<<endl;
+    printf("\t\t\t~end\n\n");
+  }
 };
 
 int main(int argc, char const *argv[])
 {
+  SymbolTable symbolTable;
+  SymbolTableEntry e1{"LOOP",-1};
+  symbolTable.addEntry(e1);
+  symbolTable.printSymbolTable();
+  SymbolTableEntry e2{"END",98};
+  symbolTable.addEntry(e2);
+  symbolTable.printSymbolTable();
+  SymbolTableEntry e3{"LOOP",10};
+  symbolTable.addEntry(e3);
+  symbolTable.printSymbolTable();
+  
   return 0;
 }
