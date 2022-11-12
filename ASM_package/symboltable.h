@@ -54,6 +54,8 @@ public:
     table["R13"] = {"R13", 13};
     table["R14"] = {"R14", 14};
     table["R15"] = {"R15", 15};
+    table["SCREEN"] = {"SCREEN", 16384};
+    table["KBD"] = {"KBD", 24576};
   }
 
   /**

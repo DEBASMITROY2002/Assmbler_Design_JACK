@@ -150,7 +150,7 @@ class Pass1: public Clipper,public Mapper
     void solve_starts_with_at(){
        int D = base_data_address;
        for(auto line:lines){
-            if(line[0]=='@' && !checkIfReserved(line.substr(1))){
+            if(line[0]=='@' && !isdigit(line[1]) && !checkIfReserved(line.substr(1))){
                 string lab_symbol = line.substr(1);
                 SymbolTableEntry e{lab_symbol,D}; 
                 symbolTable.addEntry(e);

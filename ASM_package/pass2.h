@@ -93,10 +93,11 @@ public:
         for (auto line : lines)
         {
             string str;
-
+            int flag = 0;
             if (line[0] == '(')
             {
                 //IGNORE
+                flag = 1;
             }
             else if (line[0] == '@')
             {
@@ -120,10 +121,12 @@ public:
                 string jump;
                 string aval;
 
-                if (line[1] == '=')
+                int pos = line.find("=");
+
+                if (pos!=string::npos)
                 {
-                    dest = line.substr(0, 1);
-                    comp = line.substr(2);
+                    dest = line.substr(0, pos);
+                    comp = line.substr(pos+1);
                     jump = "null";
 
                     aval = (comp.find("M") != string::npos) ? "1" : "0";
@@ -158,7 +161,9 @@ public:
 
                 str = str + aval + map_compbits[comp] + map_destbits[dest] + map_jumpbits[jump];
             }
-            words.push_back(str);
+
+            if(!flag)
+                words.push_back(str);
         }
     }
 
