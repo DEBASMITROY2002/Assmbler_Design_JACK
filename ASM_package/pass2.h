@@ -137,7 +137,9 @@ public:
                          * HERE IMON THINKS ANOTHER CHECK 
                          * IS TO BE DONE.
                          * LIKE line[2]=='=' 
+                         * LIKE line[3]=='=' 
                          * FOR CASES LIKE MD=SOMETHING
+                         * OR AMD = SKDHFK
                          * 
                          */
 
