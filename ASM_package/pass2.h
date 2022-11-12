@@ -121,12 +121,12 @@ public:
                 string jump;
                 string aval;
 
-                int pos = line.find("=");
+                int pos = line.find("="); //don't know length of destination variable
 
-                if (pos!=string::npos)
+                if (pos != string::npos) // if there is equal sign within the instruciton
                 {
                     dest = line.substr(0, pos);
-                    comp = line.substr(pos+1);
+                    comp = line.substr(pos + 1);
                     jump = "null";
 
                     aval = (comp.find("M") != string::npos) ? "1" : "0";
@@ -134,21 +134,8 @@ public:
                         if (x == 'M')
                             x = 'A';
                 }
-                else
+                else // no equal sign -> i.e=> JUMP instruction
                 {
-                    /**
-                         * HERE IMON THINKS ANOTHER CHECK 
-                         * IS TO BE DONE.
-                         * LIKE line[2]=='=' 
-                         * LIKE line[3]=='=' 
-                         * FOR CASES LIKE MD=SOMETHING
-                         * OR AMD = SKDHFK
-                         * 
-                         * 
-                         * 
-                         * 
-                         */
-
                     dest = "null";
                     comp = line.substr(0, 1);
                     jump = line.substr(2);
@@ -162,7 +149,7 @@ public:
                 str = str + aval + map_compbits[comp] + map_destbits[dest] + map_jumpbits[jump];
             }
 
-            if(!flag)
+            if (!flag)
                 words.push_back(str);
         }
     }
