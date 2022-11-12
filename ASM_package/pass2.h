@@ -36,6 +36,7 @@ public:
         map_compbits["D-1"] = "001110";
         map_compbits["A-1"] = "110010";
         map_compbits["D+A"] = "000010";
+        map_compbits["A+D"] = "000010";
         map_compbits["D-A"] = "010011";
         map_compbits["A-D"] = "000111";
         map_compbits["D&A"] = "000000";
