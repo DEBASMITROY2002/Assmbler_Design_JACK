@@ -8,6 +8,8 @@
 
 # How To compile and run:
 
-(base) asm % g++ main.cpp -std=c++17
+(base) asm % cd ASM_package
 
-(base) asm % ./a.out ./max.asm
+(base) ASM_package % g++ main.cpp -std=c++17
+
+(base) ASM_package % ./a.out ./max.asm
